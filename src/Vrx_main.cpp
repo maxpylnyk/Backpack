@@ -29,6 +29,14 @@
   #include "rapidfire.h"
 #elif defined(RX5808_BACKPACK)
   #include "rx5808.h"
+#elif defined(RX3364_BACKPACK)
+  #include "rx3364.h"
+#elif defined(RUSHFPV_3G3_BACKPACK)
+  #include "rushfpv_3G3.h"
+#elif defined(RUSHFPV_7G2_BACKPACK)
+  #include "rushfpv_7G2.h"
+#elif defined(THOR67_BACKPACK)
+  #include "thor67.h"
 #elif defined(STEADYVIEW_BACKPACK)
   #include "steadyview.h"
 #elif defined(FUSION_BACKPACK)
@@ -68,11 +76,13 @@ unsigned long bindingStart = 0;
 unsigned long rebootTime = 0;
 
 uint8_t cachedIndex = 0;
+int8_t vtxTableSize = TABLE_5G8_SIZE;
 bool sendChannelChangesToVrx = false;
 bool sendHeadTrackingChangesToVrx = false;
 bool sendRTCChangesToVrx = false;
 bool gotInitialPacket = false;
 bool headTrackingEnabled = false;
+bool saveLastIndex = false;
 uint32_t lastSentRequest = 0;
 
 device_t *ui_devices[] = {
@@ -110,6 +120,14 @@ VrxBackpackConfig config;
   Rapidfire vrxModule;
 #elif defined(RX5808_BACKPACK)
   RX5808 vrxModule;
+#elif defined(RX3364_BACKPACK)
+  RX3364 vrxModule;
+#elif defined(RUSHFPV_3G3_BACKPACK)
+  RUSHFPV_3G3 vrxModule;
+#elif defined(RUSHFPV_7G2_BACKPACK)
+  RUSHFPV_7G2 vrxModule;
+#elif defined(THOR67_BACKPACK)
+  Thor67 vrxModule;
 #elif defined(STEADYVIEW_BACKPACK)
   SteadyView vrxModule;
 #elif defined(FUSION_BACKPACK)
@@ -137,8 +155,12 @@ void SetupEspNow();
 
 void RebootIntoWifi(wifi_service_t service = WIFI_SERVICE_UPDATE)
 {
+  bool startWiFi = true;
+#if defined(RUSHFPV_3G3_BACKPACK) | defined(RUSHFPV_7G2_BACKPACK)
+  startWiFi = false;
+#endif
   DBGLN("Rebooting into wifi update mode...");
-  config.SetStartWiFiOnBoot(true);
+  config.SetStartWiFiOnBoot(startWiFi);
   config.SetBootCount(0);
   config.Commit();
   rebootTime = millis();
@@ -216,7 +238,7 @@ void ProcessMSPPacket(mspPacket_t *packet)
   {
   case MSP_SET_VTX_CONFIG:
     DBGLN("Processing MSP_SET_VTX_CONFIG...");
-    if (packet->payload[0] < 48) // Standard 48 channel VTx table size e.g. A, B, E, F, R, L
+    if (packet->payload[0] < vtxTableSize) // Standard 48 channel VTx table size e.g. A, B, E, F, R, L
     {
       // cache changes here, to be handled outside this callback, in the main loop
       cachedIndex = packet->payload[0];;
@@ -479,6 +501,9 @@ void setup()
   vrxModule.Init();
   #if defined(HDZERO_BACKPACK)
     Serial.begin(VRX_UART_BAUD);
+  #elif defined(RX3364_BACKPACK) | defined(RUSHFPV_3G3_BACKPACK) | defined(RUSHFPV_7G2_BACKPACK)
+    saveLastIndex = true;
+    vrxModule.SendIndexCmd(config.GetIndex());
   #endif
   DBGLN("Setup completed");
 }
@@ -518,6 +543,11 @@ void loop()
   {
     sendChannelChangesToVrx = false;
     vrxModule.SendIndexCmd(cachedIndex);
+    config.SetIndex(cachedIndex);
+
+    if (saveLastIndex) {
+      config.Commit();
+    }
   }
   if (sendHeadTrackingChangesToVrx)
   {

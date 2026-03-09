@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include "crsf_protocol.h"
 #include "msp.h"
+#include "common.h"
 
 class ModuleBase
 {

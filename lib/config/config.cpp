@@ -228,6 +228,16 @@ VrxBackpackConfig::SetStartWiFiOnBoot(bool startWifi)
     m_modified = true;
 }
 
+void
+VrxBackpackConfig::SetIndex(uint8_t index)
+{
+    if (index >= TABLE_5G8_SIZE) {
+        index = 0;
+    }
+    m_config.index = index;
+    m_modified = true;
+}
+
 #if defined(HAS_HEADTRACKING)
 void
 VrxBackpackConfig::SetCompassCalibration(const int calibrationData[3][2])

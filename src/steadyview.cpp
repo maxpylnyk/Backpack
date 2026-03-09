@@ -26,7 +26,7 @@ SteadyView::SendIndexCmd(uint8_t index)
     DBG("Setting index ");
     DBGLN("%x", index);
 
-    uint16_t f = frequencyTable[index];
+    uint16_t f = table5G8[index];
     uint32_t data = ((((f - 479) / 2) / 32) << 7) | (((f - 479) / 2) % 32);
     uint32_t newRegisterData = SYNTHESIZER_REG_B  | (RX5808_WRITE_CTRL_BIT << 4) | (data << 5);
 
@@ -50,7 +50,7 @@ SteadyView::SetMode(videoMode_t mode)
         digitalWrite(PIN_CLK, LOW);
         delay(500);
     }
-    uint16_t f = frequencyTable[currentIndex];
+    uint16_t f = table5G8[currentIndex];
     uint32_t data = ((((f - 479) / 2) / 32) << 7) | (((f - 479) / 2) % 32);
     uint32_t registerData = SYNTHESIZER_REG_B  | (RX5808_WRITE_CTRL_BIT << 4) | (data << 5);
 

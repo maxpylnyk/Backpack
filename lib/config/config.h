@@ -1,6 +1,7 @@
 #pragma once
 
 #include "elrs_eeprom.h"
+#include "common.h"
 
 // CONFIG_MAGIC is ORed with CONFIG_VERSION in the version field
 #define TX_BACKPACK_CONFIG_MAGIC    (0b01U << 30)
@@ -87,6 +88,7 @@ typedef struct {
     char        ssid[33];
     char        password[65];
     uint8_t     address[6];
+    uint8_t     index;
 #if defined(HAS_HEADTRACKING)
     int         compassCalibration[3][2];
     float       imuCalibration[3];
@@ -128,6 +130,7 @@ public:
     char    *GetSSID() { return m_config.ssid; }
     char    *GetPassword() { return m_config.password; }
     uint8_t *GetGroupAddress() { return m_config.address; }
+    uint8_t  GetIndex() { return m_config.index; }
 
     // Setters
     void SetStorageProvider(ELRS_EEPROM *eeprom);
@@ -137,6 +140,7 @@ public:
     void SetSSID(const char *ssid);
     void SetPassword(const char *ssid);
     void SetGroupAddress(const uint8_t address[6]);
+    void SetIndex(uint8_t index);
 
 #if defined(HAS_HEADTRACKING)
     int     (*GetCompassCalibration())[3][2] { return &m_config.compassCalibration; }

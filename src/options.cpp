@@ -43,7 +43,7 @@ void saveOptions(Stream &stream, bool customised)
 
     if (firmwareOptions.hasUID)
     {
-        JsonArray uid = doc.createNestedArray("uid");
+        JsonArray uid = doc["uid"].to<JsonArray>();
         copyArray(firmwareOptions.uid, sizeof(firmwareOptions.uid), uid);
     }
     if (firmwareOptions.home_wifi_ssid[0])

@@ -45,7 +45,7 @@ RX5808::SendIndexCmd(uint8_t index)
     DBG("Setting index ");
     DBGLN("%x", index);
 
-    uint16_t f = frequencyTable[index];
+    uint16_t f = table5G8[index];
     
     uint32_t data = ((((f - 479) / 2) / 32) << 7) | (((f - 479) / 2) % 32);
 

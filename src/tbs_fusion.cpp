@@ -16,7 +16,7 @@ Fusion::Init()
 void
 Fusion::SendIndexCmd(uint8_t index)
 {
-    uint16_t f = frequencyTable[index];
+    uint16_t f = table5G8[index];
     uint8_t buf[12];
     uint8_t pos = 0;
 

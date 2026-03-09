@@ -522,6 +522,50 @@
             }
         }
     },
+    "rx3364": {
+        "name": "RX3364 Module",
+        "vrx": {
+            "rx": {
+                "product_name": "ELRS Receiver",
+                "firmware": "RX3364_ESP_RX_Backpack",
+                "upload_methods": ["uart"],
+                "platform": "esp32-c3"
+            }
+        }
+    },
+    "rushfpv_3G3": {
+        "name": "RUSHFPV 3G3 VRX",
+        "vrx": {
+            "rx": {
+                "product_name": "ESP32C3 Module",
+                "firmware": "RUSHFPV_3G3_ESP32C3_Backpack",
+                "upload_methods": ["uart"],
+                "platform": "esp32-c3"
+            }
+        }
+    },
+    "rushfpv_7G2": {
+        "name": "RUSHFPV 7G2 VRX",
+        "vrx": {
+            "rx": {
+                "product_name": "ESP32C3 Module",
+                "firmware": "RUSHFPV_7G2_ESP32C3_Backpack",
+                "upload_methods": ["uart"],
+                "platform": "esp32-c3"
+            }
+        }
+    },
+    "thor67": {
+        "name": "Thor R67 VRX",
+        "vrx": {
+            "rx": {
+                "product_name": "ELRS Receiver",
+                "firmware": "Thor67_ESP_RX_Backpack",
+                "upload_methods": ["uart", "wifi"],
+                "platform": "esp8285"
+            }
+        }
+    },
     "skyzone": {
         "name": "Skyzone Steadyview",
         "vrx": {
