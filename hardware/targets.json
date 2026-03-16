@@ -525,7 +525,7 @@
     "rx3364": {
         "name": "RX3364 Module",
         "vrx": {
-            "rx": {
+            "esp32c3": {
                 "product_name": "ELRS Receiver",
                 "firmware": "RX3364_ESP_RX_Backpack",
                 "upload_methods": ["uart"],
@@ -536,7 +536,7 @@
     "rushfpv_3G3": {
         "name": "RUSHFPV 3G3 VRX",
         "vrx": {
-            "rx": {
+            "esp32c3": {
                 "product_name": "ESP32C3 Module",
                 "firmware": "RUSHFPV_3G3_ESP32C3_Backpack",
                 "upload_methods": ["uart"],
@@ -547,7 +547,7 @@
     "rushfpv_7G2": {
         "name": "RUSHFPV 7G2 VRX",
         "vrx": {
-            "rx": {
+            "esp32c3": {
                 "product_name": "ESP32C3 Module",
                 "firmware": "RUSHFPV_7G2_ESP32C3_Backpack",
                 "upload_methods": ["uart"],
