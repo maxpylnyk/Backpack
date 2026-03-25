@@ -566,6 +566,17 @@
             }
         }
     },
+    "dec1": {
+        "name": "Dec1 Spot 4G5 VRX",
+        "vrx": {
+            "esp32c3": {
+                "product_name": "ESP32C3 Module",
+                "firmware": "Dec1_Spot_4G5_ESP32C3_Backpack",
+                "upload_methods": ["uart"],
+                "platform": "esp32c3"
+            }
+        }
+    },
     "skyzone": {
         "name": "Skyzone Steadyview",
         "vrx": {

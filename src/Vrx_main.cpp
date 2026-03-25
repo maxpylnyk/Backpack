@@ -37,6 +37,8 @@
   #include "rushfpv_7G2.h"
 #elif defined(THOR67_BACKPACK)
   #include "thor67.h"
+#elif defined(DEC1_SPOT_4G5_BACKPACK)
+  #include "dec1_spot_4G5.h"
 #elif defined(STEADYVIEW_BACKPACK)
   #include "steadyview.h"
 #elif defined(FUSION_BACKPACK)
@@ -67,8 +69,13 @@
   #define VRX_UART_BAUD  460800
 #endif
 
-/////////// GLOBALS ///////////
+#if defined(RX3364_BACKPACK) | defined(RUSHFPV_3G3_BACKPACK) | defined(RUSHFPV_7G2_BACKPACK) | defined(DEC1_SPOT_4G5_BACKPACK)
+  #define WIFI_ENABLE 0
+#else
+  #define WIFI_ENABLE 1
+#endif
 
+/////////// GLOBALS ///////////
 uint8_t backpackVersion[] = {LATEST_VERSION, 0};
 
 connectionState_e connectionState = starting;
@@ -128,6 +135,8 @@ VrxBackpackConfig config;
   RUSHFPV_7G2 vrxModule;
 #elif defined(THOR67_BACKPACK)
   Thor67 vrxModule;
+#elif defined(DEC1_SPOT_4G5_BACKPACK)
+  Dec1Spot4G5 vrxModule;
 #elif defined(STEADYVIEW_BACKPACK)
   SteadyView vrxModule;
 #elif defined(FUSION_BACKPACK)
@@ -155,12 +164,8 @@ void SetupEspNow();
 
 void RebootIntoWifi(wifi_service_t service = WIFI_SERVICE_UPDATE)
 {
-  bool startWiFi = true;
-#if defined(RUSHFPV_3G3_BACKPACK) | defined(RUSHFPV_7G2_BACKPACK)
-  startWiFi = false;
-#endif
   DBGLN("Rebooting into wifi update mode...");
-  config.SetStartWiFiOnBoot(startWiFi);
+  config.SetStartWiFiOnBoot(WIFI_ENABLE);
   config.SetBootCount(0);
   config.Commit();
   rebootTime = millis();
