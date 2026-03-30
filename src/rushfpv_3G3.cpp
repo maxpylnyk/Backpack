@@ -66,5 +66,5 @@ void RUSHFPV_3G3::SendIndexCmd(uint8_t index) {
         writeRegister(registers[i]);
         delayMicroseconds(10);
     }
-    display->printIndex(index);
+    display->print(bands[index / 8], index % 8 + 1);
 }

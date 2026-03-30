@@ -217,13 +217,7 @@ uint32_t TM1650::getButtons()
   return(uButtons);
 }
 
-void TM1650::printIndex(uint8_t idx) {
-  uint8_t band = idx / divisor;
-  uint8_t chnl = idx % divisor + 1;
-  String out = String(bands[band]) + String(chnl);
-
-  if (idx >= maxIdx) {
-    out = "--";
-  }
+void TM1650::print(char band, uint8_t chnl) {
+  String out = String(band) + String(chnl);
   setDisplayToString(out.c_str());
 }

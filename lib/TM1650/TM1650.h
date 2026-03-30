@@ -35,7 +35,7 @@ class TM1650 : public TM16xx
     virtual void clearDisplay();
     virtual void setupDisplay(bool active, byte intensity);
     virtual uint32_t getButtons();
-    void printIndex(uint8_t idx);
+    void print(char band, uint8_t chnl);
 
   protected:
 #if defined(__AVR_ATtiny85__) ||  defined(__AVR_ATtiny13__) ||  defined(__AVR_ATtiny44__)
@@ -48,10 +48,6 @@ class TM1650 : public TM16xx
     virtual void send(byte data);
     virtual void sendData(byte address, byte data);
     virtual byte receive();
-
-    const char bands[8] = {'A', 'b', 'E', 'F', 'r', 'P', 'H', 'U'};
-    const uint8_t divisor = 8;
-    const uint8_t maxIdx = 64;
 };
 
 #endif

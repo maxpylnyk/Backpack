@@ -80,6 +80,6 @@ void RUSHFPV_7G2::SendIndexCmd(uint8_t index) {
         firstChange = false;
     }
     writeChnl(index);
-    display->printIndex(index);
+    display->print(bands[index / 8], index % 8 + 1);
     prevChnl = index;
 }

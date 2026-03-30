@@ -17,6 +17,7 @@ private:
     const float ifMHz = 480.0;
     const uint16_t oscFreqMHz = 400;
     const uint32_t prescaler = 0x10000u;
+    const char bands[8] = {'A', 'b', 'E', 'F', 'r', 'P', 'H', 'u'};
 
     void writeRegister(uint32_t reg);
 };
