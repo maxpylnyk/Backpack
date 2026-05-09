@@ -26,7 +26,7 @@ const uint64_t restSeq[8] = {
     0x4D1000800, 0x58088E872, 0x7410064AD, 0x8A7FC0003,
     0x90458C8E0, 0xC84500600, 0xFA76300A2, 0x10CFA0337B
 };
-const char bands[10] = {'A', 'b', 'E', 'F', 'r', 'L', 'X', 'y', 'j', 'u'};
+const char bands[10] = {'A', 'b', 'E', 'F', 'r', 'L', 'X', 'j', 'c', 'd'};
 
 class RUSHFPV_6G1 : public ModuleBase {
 public:

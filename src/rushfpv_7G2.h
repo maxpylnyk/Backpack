@@ -17,7 +17,7 @@ const uint64_t initSeq[25] = {
     0x89FFFFFFFF, 0x9045888E0,
     0x89FFFFFFFF, 0x9045088E0
 };
-const char bands[8] = {'A', 'b', 'E', 'F', 'r', 'P', 'H', 'u'};
+const char bands[10] = {'A', 'b', 'E', 'F', 'r', 'P', 'H', 'u', 'c', 'd'};
 
 
 class RUSHFPV_7G2 : public ModuleBase {

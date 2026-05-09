@@ -85,7 +85,7 @@ unsigned long bindingStart = 0;
 unsigned long rebootTime = 0;
 
 uint8_t cachedIndex = 0;
-int8_t vtxTableSize = TABLE_5G8_SIZE;
+int16_t vtxTableSize = TABLE_MAX_SIZE;
 bool sendChannelChangesToVrx = false;
 bool sendHeadTrackingChangesToVrx = false;
 bool sendRTCChangesToVrx = false;

@@ -69,7 +69,7 @@ void RUSHFPV_7G2::SendIndexCmd(uint8_t index) {
     DBG("Setting index ");
     DBGLN("%x", index);
 
-    if (index > 64u) {
+    if (index > TABLE_7G2_SIZE) {
         writeChnl(0u);
         prevChnl = 0u;
         return;
