@@ -25,11 +25,11 @@ void RX3364::SendIndexCmd(uint8_t index) {
     DBG("Setting index ");
     DBGLN("%x", index);
 
-    if (index >= TABLE_3G3_SIZE) {
+    if (index >= TABLE_PEAK35_SIZE) {
         index = 0;
     }
     uint8_t oscMultiplier;
-    uint16_t f = table3G3[index];
+    uint16_t f = tablePeak35[index];
 
     if (f >= 3175) {
       oscMultiplier = 0x20;
