@@ -33,7 +33,9 @@
   #include "rx3364.h"
 #elif defined(RUSHFPV_3G3_BACKPACK)
   #include "rushfpv_3G3.h"
-  #elif defined(RUSHFPV_6G1_BACKPACK)
+#elif defined(RUSHFPV_3G8_BACKPACK)
+  #include "rushfpv_3G8.h"
+#elif defined(RUSHFPV_6G1_BACKPACK)
   #include "rushfpv_6G1.h"
 #elif defined(RUSHFPV_7G2_BACKPACK)
   #include "rushfpv_7G2.h"
@@ -71,7 +73,7 @@
   #define VRX_UART_BAUD  460800
 #endif
 
-#if defined(RX3364_BACKPACK) | defined(RUSHFPV_3G3_BACKPACK) | defined(RUSHFPV_6G1_BACKPACK) | defined(RUSHFPV_7G2_BACKPACK) | defined(DEC1_SPOT_4G5_BACKPACK)
+#if defined(RX3364_BACKPACK) | defined(RUSHFPV_3G3_BACKPACK) | defined(RUSHFPV_3G8_BACKPACK) | defined(RUSHFPV_6G1_BACKPACK) | defined(RUSHFPV_7G2_BACKPACK) | defined(DEC1_SPOT_4G5_BACKPACK)
   #define WIFI_ENABLE 0
 #else
   #define WIFI_ENABLE 1
@@ -133,6 +135,8 @@ VrxBackpackConfig config;
   RX3364 vrxModule;
 #elif defined(RUSHFPV_3G3_BACKPACK)
   RUSHFPV_3G3 vrxModule;
+#elif defined(RUSHFPV_3G8_BACKPACK)
+  RUSHFPV_3G8 vrxModule;
 #elif defined(RUSHFPV_6G1_BACKPACK)
   RUSHFPV_6G1 vrxModule;
 #elif defined(RUSHFPV_7G2_BACKPACK)
@@ -510,7 +514,7 @@ void setup()
   vrxModule.Init();
   #if defined(HDZERO_BACKPACK)
     Serial.begin(VRX_UART_BAUD);
-  #elif defined(RX3364_BACKPACK) | defined(RUSHFPV_3G3_BACKPACK) | defined(RUSHFPV_7G2_BACKPACK)
+  #elif defined(RX3364_BACKPACK) | defined(RUSHFPV_3G3_BACKPACK) | defined(RUSHFPV_3G8_BACKPACK) | defined(RUSHFPV_6G1_BACKPACK) | defined(RUSHFPV_7G2_BACKPACK)
     saveLastIndex = true;
     vrxModule.SendIndexCmd(config.GetIndex());
   #endif

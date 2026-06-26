@@ -45,12 +45,12 @@ void RUSHFPV_3G3::SendIndexCmd(uint8_t index) {
     DBG("Setting index ");
     DBGLN("%x", index);
 
-    if (index > TABLE_3G3_SIZE) {
+    if (index > TABLE_PEAK35_SIZE) {
         index = 0;
     }
 
     uint8_t oscMultiplier = 0x08;
-    uint16_t f = table3G3[index];
+    uint16_t f = tablePeak35[index];
     uint32_t fLo = (f - ifMHz) * prescaler / oscFreqMHz * oscMultiplier;
     uint16_t divA = fLo / prescaler;
     uint16_t divB = fLo % prescaler;
