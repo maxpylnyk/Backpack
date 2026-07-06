@@ -52,7 +52,7 @@ void RUSHFPV_6G1::writeWord(uint64_t word) {
 }
 
 void RUSHFPV_6G1::writeChnl(uint8_t index) {
-    uint16_t f = table5G8[index];
+    uint16_t f = table6G[index];
     uint16_t fDif = f - ifMHz;
     double fLo = fDif / 5.0;
     double fLo2 = fDif / 2.5;
@@ -126,7 +126,7 @@ void RUSHFPV_6G1::SendIndexCmd(uint8_t index) {
     DBG("Setting index ");
     DBGLN("%x", index);
 
-    if (index > TABLE_5G8_SIZE) {
+    if (index > TABLE_6G_SIZE) {
         writeChnl(0u);
         prevChnl = 0u;
         return;

@@ -52,7 +52,11 @@ void RUSHFPV_7G2::writeWord(uint64_t word) {
 }
 
 void RUSHFPV_7G2::writeChnl(uint8_t index) {
+#if USE_6G_MODE
+    uint16_t f = table6G[index];
+#else
     uint16_t f = table7G2[index];
+#endif
     uint16_t fLo = (f - ifMHz) / 5;
     uint64_t word1 = 0x0350000400 | 2 * fLo << 12;
     uint64_t word2 = 0x0100000000;
@@ -69,7 +73,7 @@ void RUSHFPV_7G2::SendIndexCmd(uint8_t index) {
     DBG("Setting index ");
     DBGLN("%x", index);
 
-    if (index > TABLE_7G2_SIZE) {
+    if (index > size) {
         writeChnl(0u);
         prevChnl = 0u;
         return;

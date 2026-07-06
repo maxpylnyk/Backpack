@@ -17,7 +17,11 @@ const uint64_t initSeq[25] = {
     0x89FFFFFFFF, 0x9045888E0,
     0x89FFFFFFFF, 0x9045088E0
 };
-const char bands[13] = {'A', 'b', 'E', 'F', 'r', 'P', 'H', 'u', 'c', 'd', 'J', 'L', 'S'};
+#if USE_6G_MODE
+    const char bands[4] = {'a', 'b', 'c', 'd'};
+#else
+    const char bands[13] = {'A', 'b', 'E', 'F', 'r', 'P', 'H', 'u', 'c', 'd', 'J', 'L', 'S'};
+#endif
 
 
 class RUSHFPV_7G2 : public ModuleBase {
@@ -35,6 +39,11 @@ private:
     const uint32_t dlyWord = dly * 2;
     const uint32_t dlyInit = 256 - dly;
 
+#if USE_6G_MODE
+    const uint8_t size = TABLE_6G_SIZE;
+#else
+    const uint8_t size = TABLE_7G2_SIZE;
+#endif
     void writeWord(uint64_t word);
     void writeChnl(uint8_t index);
 };
