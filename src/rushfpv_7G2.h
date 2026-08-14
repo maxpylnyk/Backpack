@@ -2,7 +2,10 @@
 
 #include "module_base.h"
 #include <Arduino.h>
-#include <TM1650.h>
+
+#if ENABLE_DISPLAY
+    #include <TM1650.h>
+#endif
 
 const int8_t initPartCount = 4;
 const int8_t initSeqIdx[initPartCount] = {18, 21, 23, 25};
@@ -17,12 +20,6 @@ const uint64_t initSeq[25] = {
     0x89FFFFFFFF, 0x9045888E0,
     0x89FFFFFFFF, 0x9045088E0
 };
-#if USE_6G_MODE
-    const char bands[4] = {'a', 'b', 'c', 'd'};
-#else
-    const char bands[13] = {'A', 'b', 'E', 'F', 'r', 'P', 'H', 'u', 'c', 'd', 'J', 'L', 'S'};
-#endif
-
 
 class RUSHFPV_7G2 : public ModuleBase {
 public:
@@ -30,20 +27,21 @@ public:
     void SendIndexCmd(uint8_t index);
 
 private:
+#if ENABLE_DISPLAY
     TM1650* display;
+#endif
+    bool use6GMode = USE_6G_MODE;
     bool firstChange = true;
     uint8_t prevChnl = UINT8_MAX;
+    uint8_t size;
     const int8_t wordLen = 40;
     const uint16_t ifMHz = 480;
     const uint32_t dly = 23;
     const uint32_t dlyWord = dly * 2;
     const uint32_t dlyInit = 256 - dly;
+    const char bands6G[4] = {'a', 'b', 'c', 'd'};
+    const char bands7G2[13] = {'A', 'b', 'E', 'F', 'r', 'P', 'H', 'u', 'a', 'b', 'c', 'd', 'e'};
 
-#if USE_6G_MODE
-    const uint8_t size = TABLE_6G_SIZE;
-#else
-    const uint8_t size = TABLE_7G2_SIZE;
-#endif
     void writeWord(uint64_t word);
     void writeChnl(uint8_t index);
 };
