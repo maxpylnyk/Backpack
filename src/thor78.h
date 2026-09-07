@@ -2,9 +2,8 @@
 
 #include "thor_vrx.h"
 
-class Thor67 : public ThorVRX {
+class Thor78 : public ThorVRX {
 public:
     void Init();
     void SendIndexCmd(uint8_t index);
-
 };

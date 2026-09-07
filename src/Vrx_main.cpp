@@ -31,6 +31,10 @@
   #include "rx5808.h"
 #elif defined(RX3364_BACKPACK)
   #include "rx3364.h"
+#elif defined(FS6075_BACKPACK)
+  #include "fs6075.h"
+#elif defined(SK7200_BACKPACK)
+  #include "sk7200.h"
 #elif defined(RUSHFPV_3G3_BACKPACK)
   #include "rushfpv_3G3.h"
 #elif defined(RUSHFPV_3G8_BACKPACK)
@@ -41,6 +45,8 @@
   #include "rushfpv_7G2.h"
 #elif defined(THOR67_BACKPACK)
   #include "thor67.h"
+#elif defined(THOR78_BACKPACK)
+  #include "thor78.h"
 #elif defined(DEC1_SPOT_4G5_BACKPACK)
   #include "dec1_spot_4G5.h"
 #elif defined(STEADYVIEW_BACKPACK)
@@ -73,7 +79,7 @@
   #define VRX_UART_BAUD  460800
 #endif
 
-#if defined(RX3364_BACKPACK) | defined(RUSHFPV_3G3_BACKPACK) | defined(RUSHFPV_3G8_BACKPACK) | defined(RUSHFPV_6G1_BACKPACK) | defined(RUSHFPV_7G2_BACKPACK) | defined(DEC1_SPOT_4G5_BACKPACK)
+#if defined(RX3364_BACKPACK) | defined(FS6075_BACKPACK) | defined(SK7200_BACKPACK) | defined(RUSHFPV_3G3_BACKPACK) | defined(RUSHFPV_3G8_BACKPACK) | defined(RUSHFPV_6G1_BACKPACK) | defined(RUSHFPV_7G2_BACKPACK) | defined(DEC1_SPOT_4G5_BACKPACK) | defined(THOR78_BACKPACK)
   #define WIFI_ENABLE 0
 #else
   #define WIFI_ENABLE 1
@@ -133,6 +139,10 @@ VrxBackpackConfig config;
   RX5808 vrxModule;
 #elif defined(RX3364_BACKPACK)
   RX3364 vrxModule;
+#elif defined(FS6075_BACKPACK)
+  FS6075 vrxModule;
+#elif defined(SK7200_BACKPACK)
+  SK7200 vrxModule;
 #elif defined(RUSHFPV_3G3_BACKPACK)
   RUSHFPV_3G3 vrxModule;
 #elif defined(RUSHFPV_3G8_BACKPACK)
@@ -143,6 +153,8 @@ VrxBackpackConfig config;
   RUSHFPV_7G2 vrxModule;
 #elif defined(THOR67_BACKPACK)
   Thor67 vrxModule;
+#elif defined(THOR78_BACKPACK)
+  Thor78 vrxModule;
 #elif defined(DEC1_SPOT_4G5_BACKPACK)
   Dec1Spot4G5 vrxModule;
 #elif defined(STEADYVIEW_BACKPACK)
@@ -514,7 +526,7 @@ void setup()
   vrxModule.Init();
   #if defined(HDZERO_BACKPACK)
     Serial.begin(VRX_UART_BAUD);
-  #elif defined(RX3364_BACKPACK) | defined(RUSHFPV_3G3_BACKPACK) | defined(RUSHFPV_3G8_BACKPACK) | defined(RUSHFPV_6G1_BACKPACK) | defined(RUSHFPV_7G2_BACKPACK)
+  #elif defined(RX3364_BACKPACK) | defined(FS6075_BACKPACK) | defined(SK7200_BACKPACK) | defined(RUSHFPV_3G3_BACKPACK) | defined(RUSHFPV_3G8_BACKPACK) | defined(RUSHFPV_6G1_BACKPACK) | defined(RUSHFPV_7G2_BACKPACK) | defined(THOR78_BACKPACK)
     saveLastIndex = true;
     vrxModule.SendIndexCmd(config.GetIndex());
   #endif

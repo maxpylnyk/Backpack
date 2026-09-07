@@ -63,6 +63,9 @@ void RUSHFPV_7G2::writeChnl(uint8_t index) {
     } else {
         f = table7G2[index];
     }
+    if (!ENABLE_DISPLAY) {
+        f = table8G[index];
+    }
     uint16_t fLo = (f - ifMHz) / 5;
     uint64_t word1 = 0x0350000400 | 2 * fLo << 12;
     uint64_t word2 = 0x0100000000;
